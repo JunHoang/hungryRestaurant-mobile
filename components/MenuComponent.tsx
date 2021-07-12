@@ -4,19 +4,20 @@ import { ListItem, Avatar } from 'react-native-elements';
 import { Dish } from '../shared/types';
 
 type Props = {
-    dishes: Dish[]
+    dishes: Dish[],
+    onPress: (dishId: number) => void
 }
 
 type Menu = {
     item: Dish,
-    index: number
+    index: number,
 }
 
-export default function MenuComponent({ dishes }: Props) {
+export default function MenuComponent({ dishes, onPress }: Props) {
 
     const renderMenuItem = ({ item, index }: Menu) => {
         return (
-            <ListItem key={index}>
+            <ListItem key={index} onPress={() => onPress(item.id)}>
                 <Avatar placeholderStyle={{ backgroundColor: 'transparent' }} rounded source={require('./images/uthappizza.png')} />
                 <ListItem.Content>
                     <ListItem.Title>{item.name}</ListItem.Title>
