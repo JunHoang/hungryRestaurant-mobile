@@ -1,23 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, FlatList } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
-import { Dish } from '../shared/types';
 
-type Props = {
-    dishes: Dish[],
-    onPress: (dishId: number) => void
-}
+import { Dish, RootStackParamList } from '../shared/types';
+import { DISHES } from '../shared/dishes';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type MenuNavigationProp = StackNavigationProp<RootStackParamList, 'Menu'>
 
 type Menu = {
     item: Dish,
     index: number,
 }
 
-export default function MenuComponent({ dishes, onPress }: Props) {
+export default function MenuComponent() {
+
+    const navigation = useNavigation<MenuNavigationProp>()
+
+    const [dishes, setDishes] = useState(DISHES)
 
     const renderMenuItem = ({ item, index }: Menu) => {
         return (
-            <ListItem key={index} onPress={() => onPress(item.id)}>
+            <ListItem key={index} onPress={() => navigation.navigate('DishDetail', { dishId: item.id })}>
                 <Avatar placeholderStyle={{ backgroundColor: 'transparent' }} rounded source={require('./images/uthappizza.png')} />
                 <ListItem.Content>
                     <ListItem.Title>{item.name}</ListItem.Title>
