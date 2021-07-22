@@ -1,3 +1,5 @@
+import { StackNavigationProp } from '@react-navigation/stack';
+
 export type Dish = {
     id: number,
     name: string,
@@ -8,3 +10,9 @@ export type Dish = {
     featured: boolean,
     description: string
 }
+
+export type RootStackParamList = {
+    Menu: undefined;
+    DishDetail: { dishId: number };
+  };
+  
