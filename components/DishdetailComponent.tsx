@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, FlatList } from 'react-native';
 import { Card, Text } from 'react-native-elements';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 
-import { Dish } from '../shared/types';
+import { Dish, RootStackParamList } from '../shared/types';
+import { DISHES } from '../shared/dishes';
 
-type Props = {
+
+type DishDetailRouteProp = RouteProp<RootStackParamList, 'DishDetail'>
+
+type PropsDish = {
     dish: Dish
 }
 
-function RenderDish({ dish }: Props) {
+function RenderDish({ dish }: PropsDish) {
     if (dish != null) {
         return (
             <Card>
@@ -25,9 +30,21 @@ function RenderDish({ dish }: Props) {
     }
 }
 
-function Dishdetail({ dish }: Props) {
+function Dishdetail() {
+    const [dishes, setDishes] = useState(DISHES)
+    const route = useRoute<DishDetailRouteProp>();
+    const dishId = +route.params.dishId
+    const foundDish = dishes.find(dish => dish.id === dishId)
+
+    if (!foundDish) {
+        return (
+            <View>
+                <Text>No dish</Text>
+            </View>
+        )
+    }
     return (
-        <RenderDish dish={dish} />
+        <RenderDish dish={foundDish} />
     )
 }
 
