@@ -6,24 +6,41 @@ import { DISHES } from '../shared/dishes';
 import Dishdetail from './DishdetailComponent';
 import Menu from './MenuComponent';
 import { NavigationContainer } from '@react-navigation/native';
-import { RootStackParamList } from '../shared/types';
+import { MainStackParamList, MenuStackParamList } from '../shared/types';
+import Home from './HomeComponent';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-const MenuNavigator = createStackNavigator<RootStackParamList>();
+const MainNavigator = createBottomTabNavigator<MainStackParamList>();
+const MenuNavigator = createStackNavigator<MenuStackParamList>();
+
 
 export default function MainComponent() {
     const [dishes, setDishes] = useState(DISHES)
+
     function getDishById(dishId: number) {
         const foundDish = dishes.find(dish => dish.id === +dishId)
         return foundDish
     }
-    return (
-        <NavigationContainer>
+
+    function MenuStackScreen() {
+        return (
             <MenuNavigator.Navigator>
                 <MenuNavigator.Screen name="Menu" component={Menu} />
                 <MenuNavigator.Screen name="DishDetail"
                     component={Dishdetail}
-                    options={({ route }) => ({ title: getDishById(route.params.dishId)?.name })} />
+                    options={({ route }) => ({ title: getDishById(route.params.dishId)?.name })}
+                />
             </MenuNavigator.Navigator>
+        )
+    }
+
+    return (
+        <NavigationContainer>
+            <MainNavigator.Navigator>
+                <MainNavigator.Screen name="Home" component={Home} />
+                <MainNavigator.Screen name="Menu" component={MenuStackScreen} />
+
+            </MainNavigator.Navigator>
         </NavigationContainer>
     )
 }

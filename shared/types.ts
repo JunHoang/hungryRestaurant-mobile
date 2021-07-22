@@ -11,8 +11,13 @@ export type Dish = {
     description: string
 }
 
-export type RootStackParamList = {
+export type MenuStackParamList = {
     Menu: undefined;
     DishDetail: { dishId: number };
-  };
+};
+
+export type MainStackParamList = {
+    Home: undefined;
+    Menu: undefined;
+}
   

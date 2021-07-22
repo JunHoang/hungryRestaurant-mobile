@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { View, FlatList } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
 
-import { Dish, RootStackParamList } from '../shared/types';
+import { Dish, MenuStackParamList } from '../shared/types';
 import { DISHES } from '../shared/dishes';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-type MenuNavigationProp = StackNavigationProp<RootStackParamList, 'Menu'>
+type MenuNavigationProp = StackNavigationProp<MenuStackParamList, 'Menu'>
 
 type Menu = {
     item: Dish,
