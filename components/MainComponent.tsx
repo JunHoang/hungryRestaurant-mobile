@@ -11,11 +11,18 @@ import { RootStackParamList } from '../shared/types';
 const MenuNavigator = createStackNavigator<RootStackParamList>();
 
 export default function MainComponent() {
+    const [dishes, setDishes] = useState(DISHES)
+    function getDishById(dishId: number) {
+        const foundDish = dishes.find(dish => dish.id === +dishId)
+        return foundDish
+    }
     return (
         <NavigationContainer>
             <MenuNavigator.Navigator>
                 <MenuNavigator.Screen name="Menu" component={Menu} />
-                <MenuNavigator.Screen name="DishDetail" component={Dishdetail} />
+                <MenuNavigator.Screen name="DishDetail"
+                    component={Dishdetail}
+                    options={({ route }) => ({ title: getDishById(route.params.dishId)?.name })} />
             </MenuNavigator.Navigator>
         </NavigationContainer>
     )

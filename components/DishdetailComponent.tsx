@@ -17,8 +17,9 @@ function RenderDish({ dish }: PropsDish) {
     if (dish != null) {
         return (
             <Card>
-                <Card.FeaturedTitle>{dish.name}</Card.FeaturedTitle>
-                <Card.Image source={require('./images/uthappizza.png')} />
+                <Card.Image source={require('./images/uthappizza.png')}>
+                    <Card.FeaturedTitle>{dish.name}</Card.FeaturedTitle>
+                </Card.Image>
                 <Text style={{ margin: 10 }}>
                     {dish.description}
                 </Text>
