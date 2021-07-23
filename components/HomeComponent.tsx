@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { ScrollView, View } from 'react-native';
 import { Card, Text } from 'react-native-elements';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import { Leader, Dish, Promotion, MainStackParamList } from '../shared/types';
+import { Leader, Dish, Promotion } from '../shared/types';
 import { DISHES } from '../shared/dishes';
 import { LEADERS } from '../shared/leaders';
 import { PROMOTIONS } from '../shared/promotions';
@@ -10,6 +11,12 @@ import { PROMOTIONS } from '../shared/promotions';
 type PropsItem = {
     item: Dish | Leader | Promotion
 }
+
+export type HomeStackParamList = {
+    Home: undefined;
+}
+
+const HomeNavigator = createStackNavigator<HomeStackParamList>();
 
 function RenderItem({ item }: PropsItem) {
     if (!item) {
@@ -27,7 +34,7 @@ function RenderItem({ item }: PropsItem) {
     }
 }
 
-export default function HomeComponent() {
+function HomeComponent() {
     const [dishes, setDishes] = useState(DISHES)
     const [promotions, setPromotions] = useState(PROMOTIONS)
     const [leaders, setLeaders] = useState(LEADERS)
@@ -38,5 +45,15 @@ export default function HomeComponent() {
             <RenderItem item={promotions.filter((promo) => promo.featured)[0]} />
             <RenderItem item={leaders.filter((leader) => leader.featured)[0]} />
         </ScrollView>
+    )
+}
+
+
+
+export default function HomeStackScreen() {
+    return (
+        <HomeNavigator.Navigator>
+            <HomeNavigator.Screen name="Home" component={HomeComponent} />
+        </HomeNavigator.Navigator>
     )
 }

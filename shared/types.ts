@@ -40,17 +40,9 @@ export type Promotion = {
     description: string
 }
 
-export type MenuStackParamList = {
-    Menu: undefined;
-    DishDetail: { dishId: number };
-};
 
-export type HomeStackParamList={
-    Home: undefined;
-}
 
-export type MainStackParamList = {
-    Home: undefined;
-    Menu: undefined;
-}
+
+
+
   
