@@ -45,6 +45,10 @@ export type MenuStackParamList = {
     DishDetail: { dishId: number };
 };
 
+export type HomeStackParamList={
+    Home: undefined;
+}
+
 export type MainStackParamList = {
     Home: undefined;
     Menu: undefined;

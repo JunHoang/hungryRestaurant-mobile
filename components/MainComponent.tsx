@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { View, Platform } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { DISHES } from '../shared/dishes';
 import Dishdetail from './DishdetailComponent';
 import Menu from './MenuComponent';
 import { NavigationContainer } from '@react-navigation/native';
-import { MainStackParamList, MenuStackParamList } from '../shared/types';
+import { MainStackParamList, MenuStackParamList, HomeStackParamList } from '../shared/types';
 import Home from './HomeComponent';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const MainNavigator = createBottomTabNavigator<MainStackParamList>();
 const MenuNavigator = createStackNavigator<MenuStackParamList>();
+const HomeNavigator = createStackNavigator<HomeStackParamList>();
 
 
 export default function MainComponent() {
@@ -34,12 +34,19 @@ export default function MainComponent() {
         )
     }
 
+    function HomeStackScreen() {
+        return (
+            <HomeNavigator.Navigator>
+                <HomeNavigator.Screen name="Home" component={Home} />
+            </HomeNavigator.Navigator>
+        )
+    }
+
     return (
         <NavigationContainer>
             <MainNavigator.Navigator>
-                <MainNavigator.Screen name="Home" component={Home} />
+                <MainNavigator.Screen name="Home" component={HomeStackScreen} />
                 <MainNavigator.Screen name="Menu" component={MenuStackScreen} />
-
             </MainNavigator.Navigator>
         </NavigationContainer>
     )

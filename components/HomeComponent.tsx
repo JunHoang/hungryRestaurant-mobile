@@ -1,16 +1,42 @@
-import React from 'react'
-import { View, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import React, { useState } from 'react'
+import { ScrollView, View } from 'react-native';
+import { Card, Text } from 'react-native-elements';
 
-import { MainStackParamList } from '../shared/types';
+import { Leader, Dish, Promotion, MainStackParamList } from '../shared/types';
+import { DISHES } from '../shared/dishes';
+import { LEADERS } from '../shared/leaders';
+import { PROMOTIONS } from '../shared/promotions';
 
-type HomeNavigationProp = StackNavigationProp<MainStackParamList, 'Home'>
+type PropsItem = {
+    item: Dish | Leader | Promotion
+}
+
+function RenderItem({ item }: PropsItem) {
+    if (!item) {
+        return (
+            <View></View>
+        )
+    } else {
+        return (
+            <Card>
+                <Card.Image source={require('./images/uthappizza.png')}>
+                    <Card.FeaturedTitle>{item.name}</Card.FeaturedTitle>
+                </Card.Image>
+                <Text style={{ margin: 10 }}>{item.description}</Text>
+            </Card>)
+    }
+}
 
 export default function HomeComponent() {
+    const [dishes, setDishes] = useState(DISHES)
+    const [promotions, setPromotions] = useState(PROMOTIONS)
+    const [leaders, setLeaders] = useState(LEADERS)
+
     return (
-        <View>
-            <Text>Home Component</Text>
-        </View>
+        <ScrollView>
+            <RenderItem item={dishes.filter((dish) => dish.featured)[0]} />
+            <RenderItem item={promotions.filter((promo) => promo.featured)[0]} />
+            <RenderItem item={leaders.filter((leader) => leader.featured)[0]} />
+        </ScrollView>
     )
 }
