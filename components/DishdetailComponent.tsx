@@ -3,9 +3,13 @@ import { View, FlatList } from 'react-native';
 import { Card, Text } from 'react-native-elements';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 
-import { Dish, MenuStackParamList } from '../shared/types';
+import { Dish } from '../shared/types';
 import { DISHES } from '../shared/dishes';
 
+type MenuStackParamList = {
+    Menu: undefined;
+    DishDetail: { dishId: number };
+};
 
 type DishDetailRouteProp = RouteProp<MenuStackParamList, 'DishDetail'>
 

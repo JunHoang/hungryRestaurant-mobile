@@ -12,7 +12,7 @@ type PropsItem = {
     item: Dish | Leader | Promotion
 }
 
-export type HomeStackParamList = {
+type HomeStackParamList = {
     Home: undefined;
 }
 
