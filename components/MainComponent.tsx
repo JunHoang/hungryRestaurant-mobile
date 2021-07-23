@@ -20,6 +20,7 @@ export default function MainComponent() {
             <MainNavigator.Navigator>
                 <MainNavigator.Screen name="Home" component={HomeStackScreen} />
                 <MainNavigator.Screen name="Menu" component={MenuStackScreen} />
+                <MainNavigator.Screen name="Contact" component={ContactStackScreen} />
             </MainNavigator.Navigator>
         </NavigationContainer>
     )
